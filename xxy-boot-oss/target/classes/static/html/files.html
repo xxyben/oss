@@ -1,0 +1,71 @@
+<span class="layui-breadcrumb"> 
+	<a href="">首页</a> 
+	<a href="">文件列表</a>
+	<a><cite>文件</cite></a>
+</span>
+
+ 
+<form class="layui-form" action="">    
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">文件名</label>
+      <div class="layui-input-inline">
+        <input type="text" name="keyword"  autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">类型</label>
+      <div class="layui-input-inline">
+        <select name="type" >
+	        <option value=""></option>
+	        <option value="0">图片</option>
+	        <option value="1" selected="">文件</option>
+	        <option value="2">其它</option>
+	      </select>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>  
+</form>
+
+<table id="demo" lay-filter="test"></table>
+
+
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script>
+layui.use(['form','table'], function(){
+  var form = layui.form,layer = layui.layer, table = layui.table;
+  
+//第一个实例
+  table.render({
+    elem: '#demo'
+    ,height: 315
+    ,url: '/demo/table/user/' //数据接口
+    ,page: true //开启分页
+    ,cols: [[ //表头
+      {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+      ,{field: 'username', title: '用户名', width:80}
+      ,{field: 'sex', title: '性别', width:80, sort: true}
+      ,{field: 'city', title: '城市', width:80} 
+      ,{field: 'sign', title: '签名', width: 177}
+      ,{field: 'experience', title: '积分', width: 80, sort: true}
+      ,{field: 'score', title: '评分', width: 80, sort: true}
+      ,{field: 'classify', title: '职业', width: 80}
+      ,{field: 'wealth', title: '财富', width: 135, sort: true}
+      ,{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}
+    ]]
+  });
+  
+});
+</script>
+
+
+

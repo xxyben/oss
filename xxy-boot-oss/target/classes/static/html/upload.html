@@ -1,0 +1,64 @@
+<span class="layui-breadcrumb"> 
+	<a href="">首页</a> 
+	<a href="">文件列表</a>
+	<a><cite>上传</cite></a>
+</span>
+
+<form class="layui-form" action="">
+	<input type="hidden" id="type" value="image">
+ <div class="layui-form-item">
+    <label class="layui-form-label">类型</label>
+    <div class="layui-input-block">
+      <input type="radio" name="type" lay-filter="type" value="image" title="图片" checked="">
+      <input type="radio" name="type" lay-filter="type" value="docs" title="文档">
+      <input type="radio" name="type" lay-filter="type" value="other" title="其它">
+    </div>
+  </div>
+</form>
+
+<div class="layui-upload-drag" id="uploadfile">
+  <i class="layui-icon"></i>
+  <p>点击上传，或将文件拖拽到此处</p>
+</div>
+
+<div id="result">
+	
+</div>
+
+
+
+<script type="text/javascript">
+	layui.use([ 'upload', 'form' ], function() {
+		var upload = layui.upload, form = layui.form;
+	
+		form.on('radio(type)', function(data) {
+			//alert(data.value);//判断单选框的选中值
+			$('#type').val(data.value);
+
+		});
+
+		//拖拽上传
+		upload.render({
+			elem : '#uploadfile',
+			url : '/upload/'+$('#type').val(),
+			accept: 'upfile',
+			done : function(res) {
+				console.log(res);
+				if(res.code==0){
+					$('#result').html(res.msg+'  '+res.url);
+				}else{
+					$('#result').html(res.msg);
+				}
+				/* 
+				var obj = JSON.parse(res);
+				if(obj.code==0){
+					$('#result').val(obj.msg+'  '+obj.url);
+				}else{
+					$('#result').val(obj.msg);
+				} */
+			}
+		});
+
+	});
+</script>
+
